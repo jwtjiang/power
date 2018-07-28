@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dtdream.line.dao.LineDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.dtdream.pojo.LineDetails">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="line_name" jdbcType="VARCHAR" property="lineName" />
+    <result column="line_id" jdbcType="VARCHAR" property="lineId" />
+    <result column="tower_name" jdbcType="VARCHAR" property="towerName" />
+    <result column="tower_id" jdbcType="VARCHAR" property="towerId" />
+    <result column="parentregion" jdbcType="VARCHAR" property="parentregion" />
+    <result column="whdj" jdbcType="VARCHAR" property="whdj" />
+    <result column="insulation_creep_distance" jdbcType="INTEGER" property="insulationCreepDistance" />
+    <result column="insulation_ton" jdbcType="INTEGER" property="insulationTon" />
+    <result column="insulation_high" jdbcType="INTEGER" property="insulationHigh" />
+    <result column="insulation_bunch_num" jdbcType="INTEGER" property="insulationBunchNum" />
+    <result column="resistance_design_value" jdbcType="INTEGER" property="resistanceDesignValue" />
+    <result column="stationmap_1" jdbcType="REAL" property="stationmap1" />
+    <result column="stationmap_2" jdbcType="REAL" property="stationmap2" />
+    <result column="voltage" jdbcType="VARCHAR" property="voltage" />
+    <result column="line_length" jdbcType="REAL" property="lineLength" />
+    <result column="maintainer" jdbcType="VARCHAR" property="maintainer" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="line_del_status" jdbcType="INTEGER" property="lineDelStatus" />
+    <result column="dilei" jdbcType="VARCHAR" property="dilei" />
+    <result column="datetime_month" jdbcType="INTEGER" property="datetimeMonth" />
+    <result column="datetime" jdbcType="DATE" property="datetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, line_name, line_id, tower_name, tower_id, parentregion, whdj, insulation_creep_distance, 
+    insulation_ton, insulation_high, insulation_bunch_num, resistance_design_value, stationmap_1, 
+    stationmap_2, voltage, line_length, maintainer, region, line_del_status, dilei, datetime_month, 
+    datetime
+  </sql>
+  <select id="selectByExample" parameterType="com.dtdream.pojo.LineDetailsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from line_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from line_details
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from line_details
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dtdream.pojo.LineDetailsExample">
+    delete from line_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dtdream.pojo.LineDetails">
+    insert into line_details (id, line_name, line_id, 
+      tower_name, tower_id, parentregion, 
+      whdj, insulation_creep_distance, insulation_ton, 
+      insulation_high, insulation_bunch_num, resistance_design_value, 
+      stationmap_1, stationmap_2, voltage, 
+      line_length, maintainer, region, 
+      line_del_status, dilei, datetime_month, 
+      datetime)
+    values (#{id,jdbcType=VARCHAR}, #{lineName,jdbcType=VARCHAR}, #{lineId,jdbcType=VARCHAR}, 
+      #{towerName,jdbcType=VARCHAR}, #{towerId,jdbcType=VARCHAR}, #{parentregion,jdbcType=VARCHAR}, 
+      #{whdj,jdbcType=VARCHAR}, #{insulationCreepDistance,jdbcType=INTEGER}, #{insulationTon,jdbcType=INTEGER}, 
+      #{insulationHigh,jdbcType=INTEGER}, #{insulationBunchNum,jdbcType=INTEGER}, #{resistanceDesignValue,jdbcType=INTEGER}, 
+      #{stationmap1,jdbcType=REAL}, #{stationmap2,jdbcType=REAL}, #{voltage,jdbcType=VARCHAR}, 
+      #{lineLength,jdbcType=REAL}, #{maintainer,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{lineDelStatus,jdbcType=INTEGER}, #{dilei,jdbcType=VARCHAR}, #{datetimeMonth,jdbcType=INTEGER}, 
+      #{datetime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dtdream.pojo.LineDetails">
+    insert into line_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="lineName != null">
+        line_name,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="towerName != null">
+        tower_name,
+      </if>
+      <if test="towerId != null">
+        tower_id,
+      </if>
+      <if test="parentregion != null">
+        parentregion,
+      </if>
+      <if test="whdj != null">
+        whdj,
+      </if>
+      <if test="insulationCreepDistance != null">
+        insulation_creep_distance,
+      </if>
+      <if test="insulationTon != null">
+        insulation_ton,
+      </if>
+      <if test="insulationHigh != null">
+        insulation_high,
+      </if>
+      <if test="insulationBunchNum != null">
+        insulation_bunch_num,
+      </if>
+      <if test="resistanceDesignValue != null">
+        resistance_design_value,
+      </if>
+      <if test="stationmap1 != null">
+        stationmap_1,
+      </if>
+      <if test="stationmap2 != null">
+        stationmap_2,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="lineLength != null">
+        line_length,
+      </if>
+      <if test="maintainer != null">
+        maintainer,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="lineDelStatus != null">
+        line_del_status,
+      </if>
+      <if test="dilei != null">
+        dilei,
+      </if>
+      <if test="datetimeMonth != null">
+        datetime_month,
+      </if>
+      <if test="datetime != null">
+        datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="lineName != null">
+        #{lineName,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerName != null">
+        #{towerName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerId != null">
+        #{towerId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentregion != null">
+        #{parentregion,jdbcType=VARCHAR},
+      </if>
+      <if test="whdj != null">
+        #{whdj,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationCreepDistance != null">
+        #{insulationCreepDistance,jdbcType=INTEGER},
+      </if>
+      <if test="insulationTon != null">
+        #{insulationTon,jdbcType=INTEGER},
+      </if>
+      <if test="insulationHigh != null">
+        #{insulationHigh,jdbcType=INTEGER},
+      </if>
+      <if test="insulationBunchNum != null">
+        #{insulationBunchNum,jdbcType=INTEGER},
+      </if>
+      <if test="resistanceDesignValue != null">
+        #{resistanceDesignValue,jdbcType=INTEGER},
+      </if>
+      <if test="stationmap1 != null">
+        #{stationmap1,jdbcType=REAL},
+      </if>
+      <if test="stationmap2 != null">
+        #{stationmap2,jdbcType=REAL},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="lineLength != null">
+        #{lineLength,jdbcType=REAL},
+      </if>
+      <if test="maintainer != null">
+        #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="lineDelStatus != null">
+        #{lineDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dilei != null">
+        #{dilei,jdbcType=VARCHAR},
+      </if>
+      <if test="datetimeMonth != null">
+        #{datetimeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dtdream.pojo.LineDetailsExample" resultType="java.lang.Long">
+    select count(*) from line_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update line_details
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineName != null">
+        line_name = #{record.lineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.towerName != null">
+        tower_name = #{record.towerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.towerId != null">
+        tower_id = #{record.towerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentregion != null">
+        parentregion = #{record.parentregion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whdj != null">
+        whdj = #{record.whdj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insulationCreepDistance != null">
+        insulation_creep_distance = #{record.insulationCreepDistance,jdbcType=INTEGER},
+      </if>
+      <if test="record.insulationTon != null">
+        insulation_ton = #{record.insulationTon,jdbcType=INTEGER},
+      </if>
+      <if test="record.insulationHigh != null">
+        insulation_high = #{record.insulationHigh,jdbcType=INTEGER},
+      </if>
+      <if test="record.insulationBunchNum != null">
+        insulation_bunch_num = #{record.insulationBunchNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.resistanceDesignValue != null">
+        resistance_design_value = #{record.resistanceDesignValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationmap1 != null">
+        stationmap_1 = #{record.stationmap1,jdbcType=REAL},
+      </if>
+      <if test="record.stationmap2 != null">
+        stationmap_2 = #{record.stationmap2,jdbcType=REAL},
+      </if>
+      <if test="record.voltage != null">
+        voltage = #{record.voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineLength != null">
+        line_length = #{record.lineLength,jdbcType=REAL},
+      </if>
+      <if test="record.maintainer != null">
+        maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null">
+        region = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineDelStatus != null">
+        line_del_status = #{record.lineDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.dilei != null">
+        dilei = #{record.dilei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetimeMonth != null">
+        datetime_month = #{record.datetimeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.datetime != null">
+        datetime = #{record.datetime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update line_details
+    set id = #{record.id,jdbcType=VARCHAR},
+      line_name = #{record.lineName,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=VARCHAR},
+      tower_name = #{record.towerName,jdbcType=VARCHAR},
+      tower_id = #{record.towerId,jdbcType=VARCHAR},
+      parentregion = #{record.parentregion,jdbcType=VARCHAR},
+      whdj = #{record.whdj,jdbcType=VARCHAR},
+      insulation_creep_distance = #{record.insulationCreepDistance,jdbcType=INTEGER},
+      insulation_ton = #{record.insulationTon,jdbcType=INTEGER},
+      insulation_high = #{record.insulationHigh,jdbcType=INTEGER},
+      insulation_bunch_num = #{record.insulationBunchNum,jdbcType=INTEGER},
+      resistance_design_value = #{record.resistanceDesignValue,jdbcType=INTEGER},
+      stationmap_1 = #{record.stationmap1,jdbcType=REAL},
+      stationmap_2 = #{record.stationmap2,jdbcType=REAL},
+      voltage = #{record.voltage,jdbcType=VARCHAR},
+      line_length = #{record.lineLength,jdbcType=REAL},
+      maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      region = #{record.region,jdbcType=VARCHAR},
+      line_del_status = #{record.lineDelStatus,jdbcType=INTEGER},
+      dilei = #{record.dilei,jdbcType=VARCHAR},
+      datetime_month = #{record.datetimeMonth,jdbcType=INTEGER},
+      datetime = #{record.datetime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dtdream.pojo.LineDetails">
+    update line_details
+    <set>
+      <if test="lineName != null">
+        line_name = #{lineName,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="towerName != null">
+        tower_name = #{towerName,jdbcType=VARCHAR},
+      </if>
+      <if test="towerId != null">
+        tower_id = #{towerId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentregion != null">
+        parentregion = #{parentregion,jdbcType=VARCHAR},
+      </if>
+      <if test="whdj != null">
+        whdj = #{whdj,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationCreepDistance != null">
+        insulation_creep_distance = #{insulationCreepDistance,jdbcType=INTEGER},
+      </if>
+      <if test="insulationTon != null">
+        insulation_ton = #{insulationTon,jdbcType=INTEGER},
+      </if>
+      <if test="insulationHigh != null">
+        insulation_high = #{insulationHigh,jdbcType=INTEGER},
+      </if>
+      <if test="insulationBunchNum != null">
+        insulation_bunch_num = #{insulationBunchNum,jdbcType=INTEGER},
+      </if>
+      <if test="resistanceDesignValue != null">
+        resistance_design_value = #{resistanceDesignValue,jdbcType=INTEGER},
+      </if>
+      <if test="stationmap1 != null">
+        stationmap_1 = #{stationmap1,jdbcType=REAL},
+      </if>
+      <if test="stationmap2 != null">
+        stationmap_2 = #{stationmap2,jdbcType=REAL},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="lineLength != null">
+        line_length = #{lineLength,jdbcType=REAL},
+      </if>
+      <if test="maintainer != null">
+        maintainer = #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="lineDelStatus != null">
+        line_del_status = #{lineDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dilei != null">
+        dilei = #{dilei,jdbcType=VARCHAR},
+      </if>
+      <if test="datetimeMonth != null">
+        datetime_month = #{datetimeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="datetime != null">
+        datetime = #{datetime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dtdream.pojo.LineDetails">
+    update line_details
+    set line_name = #{lineName,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=VARCHAR},
+      tower_name = #{towerName,jdbcType=VARCHAR},
+      tower_id = #{towerId,jdbcType=VARCHAR},
+      parentregion = #{parentregion,jdbcType=VARCHAR},
+      whdj = #{whdj,jdbcType=VARCHAR},
+      insulation_creep_distance = #{insulationCreepDistance,jdbcType=INTEGER},
+      insulation_ton = #{insulationTon,jdbcType=INTEGER},
+      insulation_high = #{insulationHigh,jdbcType=INTEGER},
+      insulation_bunch_num = #{insulationBunchNum,jdbcType=INTEGER},
+      resistance_design_value = #{resistanceDesignValue,jdbcType=INTEGER},
+      stationmap_1 = #{stationmap1,jdbcType=REAL},
+      stationmap_2 = #{stationmap2,jdbcType=REAL},
+      voltage = #{voltage,jdbcType=VARCHAR},
+      line_length = #{lineLength,jdbcType=REAL},
+      maintainer = #{maintainer,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      line_del_status = #{lineDelStatus,jdbcType=INTEGER},
+      dilei = #{dilei,jdbcType=VARCHAR},
+      datetime_month = #{datetimeMonth,jdbcType=INTEGER},
+      datetime = #{datetime,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
