@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-
-
-
-mybatis:
-  type-aliases-package: com.dtdream.pojo
-  mapper-locations: classpath:mapper/*.xml
-spring:
-  datasource:
-    name: anhui
-    #使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      #监控统计拦截的filters
-      filters: stat
-      driver-class-name: com.mysql.jdbc.Driver
-      #基本属性
-      url: jdbc:mysql://127.0.0.1:13306/anhui
-      username: root
-      password: 123456
-
-
-=======
-
 
 
 mybatis:
@@ -42,4 +18,3 @@ spring:
       password: 123456
 
 
->>>>>>> 7942b11a60b5f5a0ecd32a53572d0fd8e9ca9cb2

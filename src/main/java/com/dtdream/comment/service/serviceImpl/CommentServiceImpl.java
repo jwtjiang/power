@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.dtdream.comment.service.serviceImpl;
 
 import com.dtdream.comment.dao.CommentMapper;
@@ -22,28 +21,3 @@ public class CommentServiceImpl implements CommentService{
         return commentMapper.insert(comment);
     }
 }
-=======
-package com.dtdream.comment.service.serviceImpl;
-
-import com.dtdream.comment.dao.CommentMapper;
-import com.dtdream.comment.service.CommentService;
-import com.dtdream.pojo.Comment;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
-public class CommentServiceImpl implements CommentService{
-    @Autowired
-    CommentMapper commentMapper;
-
-    @Override
-    public Comment selectByPrimaryKey(String commentid) {
-        return commentMapper.selectByPrimaryKey(commentid);
-    }
-
-    @Override
-    public int insertComment(Comment comment) {
-        return commentMapper.insert(comment);
-    }
-}
->>>>>>> 7942b11a60b5f5a0ecd32a53572d0fd8e9ca9cb2
