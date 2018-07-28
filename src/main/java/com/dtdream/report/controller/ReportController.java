@@ -47,7 +47,7 @@ public class ReportController {
 
 
         List<Report> reportList = reportService.queryListByParam(map);
-
+        System.out.println();
         resultMap.put("count",count);
         resultMap.put("reportList",reportList);
         return resultMap;
