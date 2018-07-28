@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dtdream.report.dao.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.dtdream.pojo.Report">
+    <id column="reportId" jdbcType="VARCHAR" property="reportid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="createTime" jdbcType="DATE" property="createtime" />
+    <result column="conformity" jdbcType="VARCHAR" property="conformity" />
+    <result column="report_del_status" jdbcType="INTEGER" property="reportDelStatus" />
+    <result column="DATE2" jdbcType="DATE" property="date2" />
+    <result column="DATE1" jdbcType="DATE" property="date1" />
+    <result column="BZ3" jdbcType="VARCHAR" property="bz3" />
+    <result column="BZ2" jdbcType="VARCHAR" property="bz2" />
+    <result column="BZ1" jdbcType="VARCHAR" property="bz1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    reportId, title, createTime, conformity, report_del_status, DATE2, DATE1, BZ3, BZ2, 
+    BZ1
+  </sql>
+  <select id="selectByExample" parameterType="com.dtdream.pojo.ReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where reportId = #{reportid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from report
+    where reportId = #{reportid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dtdream.pojo.ReportExample">
+    delete from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dtdream.pojo.Report">
+    insert into report (reportId, title, createTime, 
+      conformity, report_del_status, DATE2, 
+      DATE1, BZ3, BZ2, BZ1
+      )
+    values (#{reportid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{conformity,jdbcType=VARCHAR}, #{reportDelStatus,jdbcType=INTEGER}, #{date2,jdbcType=DATE}, 
+      #{date1,jdbcType=DATE}, #{bz3,jdbcType=VARCHAR}, #{bz2,jdbcType=VARCHAR}, #{bz1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dtdream.pojo.Report">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportid != null">
+        reportId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="conformity != null">
+        conformity,
+      </if>
+      <if test="reportDelStatus != null">
+        report_del_status,
+      </if>
+      <if test="date2 != null">
+        DATE2,
+      </if>
+      <if test="date1 != null">
+        DATE1,
+      </if>
+      <if test="bz3 != null">
+        BZ3,
+      </if>
+      <if test="bz2 != null">
+        BZ2,
+      </if>
+      <if test="bz1 != null">
+        BZ1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportid != null">
+        #{reportid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="conformity != null">
+        #{conformity,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDelStatus != null">
+        #{reportDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="date2 != null">
+        #{date2,jdbcType=DATE},
+      </if>
+      <if test="date1 != null">
+        #{date1,jdbcType=DATE},
+      </if>
+      <if test="bz3 != null">
+        #{bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="bz2 != null">
+        #{bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="bz1 != null">
+        #{bz1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dtdream.pojo.ReportExample" resultType="java.lang.Long">
+    select count(*) from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update report
+    <set>
+      <if test="record.reportid != null">
+        reportId = #{record.reportid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.conformity != null">
+        conformity = #{record.conformity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportDelStatus != null">
+        report_del_status = #{record.reportDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.date2 != null">
+        DATE2 = #{record.date2,jdbcType=DATE},
+      </if>
+      <if test="record.date1 != null">
+        DATE1 = #{record.date1,jdbcType=DATE},
+      </if>
+      <if test="record.bz3 != null">
+        BZ3 = #{record.bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz2 != null">
+        BZ2 = #{record.bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz1 != null">
+        BZ1 = #{record.bz1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update report
+    set reportId = #{record.reportid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=DATE},
+      conformity = #{record.conformity,jdbcType=VARCHAR},
+      report_del_status = #{record.reportDelStatus,jdbcType=INTEGER},
+      DATE2 = #{record.date2,jdbcType=DATE},
+      DATE1 = #{record.date1,jdbcType=DATE},
+      BZ3 = #{record.bz3,jdbcType=VARCHAR},
+      BZ2 = #{record.bz2,jdbcType=VARCHAR},
+      BZ1 = #{record.bz1,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dtdream.pojo.Report">
+    update report
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="conformity != null">
+        conformity = #{conformity,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDelStatus != null">
+        report_del_status = #{reportDelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="date2 != null">
+        DATE2 = #{date2,jdbcType=DATE},
+      </if>
+      <if test="date1 != null">
+        DATE1 = #{date1,jdbcType=DATE},
+      </if>
+      <if test="bz3 != null">
+        BZ3 = #{bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="bz2 != null">
+        BZ2 = #{bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="bz1 != null">
+        BZ1 = #{bz1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where reportId = #{reportid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dtdream.pojo.Report">
+    update report
+    set title = #{title,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=DATE},
+      conformity = #{conformity,jdbcType=VARCHAR},
+      report_del_status = #{reportDelStatus,jdbcType=INTEGER},
+      DATE2 = #{date2,jdbcType=DATE},
+      DATE1 = #{date1,jdbcType=DATE},
+      BZ3 = #{bz3,jdbcType=VARCHAR},
+      BZ2 = #{bz2,jdbcType=VARCHAR},
+      BZ1 = #{bz1,jdbcType=VARCHAR}
+    where reportId = #{reportid,jdbcType=VARCHAR}
+  </update>
+
+  <!--根据查询条件查询总数-->
+  <select id="queryCountByParam" parameterType="java.util.Map" resultType="java.lang.Integer">
+      select count(1) from report
+      <where>
+        1 = 1
+        <include refid="_common_where"/>
+      </where>
+  </select>
+  
+  <!--根据查询条件查询列表-->
+  <select id="queryListByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+     <include refid="_field_list"/>
+    from
+     report
+    where
+      1 =1
+      <include refid="_common_where"/>
+    <include refid="sorts"/>
+    <include refid="page"/>
+  </select>
+
+  <!--通用条件查询-->
+  <sql id="_common_where">
+    <if test="title != null"> AND title = #{title}</if>
+    <if test="createTime != null"> AND createTime = #{createTime}</if>
+    <if test="conformity != null"> AND conformity = #{conformity}</if>
+    <if test="report_del_status != null"> AND report_del_status = #{report_del_status}</if>
+  </sql>
+
+  <!--字段列表-->
+  <sql id = "_field_list">
+    reportId,
+    title,
+    createTime,
+    conformity,
+    report_del_status
+  </sql>
+
+  <!--排序处理-->
+  <sql id="sorts">
+    order by createTime desc;
+  </sql>
+
+  <!--分页处理-->
+  <sql id="page">
+    <if test="pageNum != null and pageSize != null" >
+      "limit" + (#{pageNum} - 1) * #{pageSize}
+      + " , " + #{pageSize};
+    </if>
+  </sql>
+</mapper>
