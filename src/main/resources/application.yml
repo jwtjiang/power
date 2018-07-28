@@ -13,7 +13,7 @@ spring:
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:13306/anhui
+      url: jdbc:mysql://10.180.4.115:13306/anhui
       username: root
       password: 123456
 
